@@ -1,11 +1,11 @@
-const{json,select,selectAll,geoOrthographic,geoPath,geoGraticule}=d3;
+const{json,select,selectAll,geoOrthographic,geoPath,geoGraticule,geoAlbers,geoEquirectangular}=d3;
 json("./js/custom.geo.json").then(data=>init(data));
 
 var geoJson,globe,projection,path,graticule,infoPanel, isMouseDown=false,rotation={x:0,y:0};
 
 const globeSize={
-    w:375,
-    h:document.getElementById("body").clientHeight
+    w:window.innerWidth/2,
+    h:window.innerHeight
 };
 
 function init(data){
@@ -19,11 +19,10 @@ function init(data){
 
 function drawGlobe(){
     globe=select("#geoMap").append("svg")
-    .attr("class","figure")
     .attr("width",window.innerWidth)
-    .attr("height",window.innerHeight);
+    .attr("height","100%");
 
-    projection=geoOrthographic().fitSize([globeSize.w,globeSize.h],geoJson);
+    projection=geoEquirectangular();
 
     path=geoPath().projection(projection);
 
