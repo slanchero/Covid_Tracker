@@ -1,3 +1,16 @@
 body{
     font-family: 'Kanit', sans-serif;
+    background-color: black;
+    color: white;
+    overflow-y: hidden;
+}
+.seccion{
+    min-height: 93vh;
+    /* min-width: 100vw; */
+}
+#introduction{
+    background-image: url(https://p4.wallpaperbetter.com/wallpaper/321/515/690/black-and-white-city-wallpaper-preview.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
