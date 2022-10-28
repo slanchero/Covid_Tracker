@@ -2,7 +2,7 @@ body{
     font-family: 'Kanit', sans-serif;
     background-color: black;
     color: white;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 .seccion{
     min-height: 93vh;
@@ -13,4 +13,8 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.button-list{
+    height: 100px;
+    overflow-y: scroll;
 }
