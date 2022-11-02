@@ -102,14 +102,16 @@ function renderDeaths(datos){
     const options={
         scales:{
             x:{
-                grid:{
-                    display:false
-                }
+                beginAtZero:true,
+                // grid:{
+                //     display:false
+                // }
             },
             y:{
-                grid:{
-                    display:false
-                }
+                beginAtZero:true,
+                // grid:{
+                //     display:false
+                // }
             }
         },
         plugins:{
@@ -150,6 +152,8 @@ function renderDeaths(datos){
 
     chart1=new Chart("graph_1",{type:"line",data,options});
     document.getElementById("reset1").addEventListener("click",()=>{resetZoomChart(chart1)});
+    // document.getElementById("zoomin1").addEventListener("click",()=>{zoomChart(chart1,1.2)});
+    // document.getElementById("zoomout1").addEventListener("click",()=>{zoomChart(chart1,0.8)});
 
 }
 
@@ -166,14 +170,16 @@ function renderCases(datos){
     const options={
         scales:{
             x:{
-                grid:{
-                    display:false
-                }
+                beginAtZero:true,
+                // grid:{
+                //     display:false
+                // }
             },
             y:{
-                grid:{
-                    display:false
-                }
+                beginAtZero:true,
+                // grid:{
+                //     display:false
+                // }
             }
         },
         plugins:{
@@ -214,7 +220,8 @@ function renderCases(datos){
 
     chart2=new Chart("graph_2",{type:"line",data,options});
     document.getElementById("reset2").addEventListener("click",()=>{resetZoomChart(chart2)});
-
+    // document.getElementById("zoomin2").addEventListener("click",()=>{zoomChart(chart2,1.2)});
+    // document.getElementById("zoomout2").addEventListener("click",()=>{zoomChart(chart2,0.8)});
 }
 
 function renderVaccination(datos){
@@ -230,14 +237,16 @@ function renderVaccination(datos){
     const options={
         scales:{
             x:{
-                grid:{
-                    display:false
-                }
+                beginAtZero:true,
+                // grid:{
+                //     display:false
+                // }
             },
             y:{
-                grid:{
-                    display:false
-                }
+                beginAtZero:true,
+                // grid:{
+                //     display:false
+                // }
             }
         },
         plugins:{
@@ -270,7 +279,7 @@ function renderVaccination(datos){
                     wheel:{
                         enabled:true,
                         modifierKey:'ctrl',
-                    }
+                    },
                 }
             }
         }
@@ -278,12 +287,17 @@ function renderVaccination(datos){
 
     chart3=new Chart("graph_3",{type:"line",data,options});
     document.getElementById("reset3").addEventListener("click",()=>{resetZoomChart(chart3)});
-
+    // document.getElementById("zoomin3").addEventListener("click",()=>{zoomChart(chart3,1.2)});
+    // document.getElementById("zoomout3").addEventListener("click",()=>{zoomChart(chart3,0.8)});
 }
 
 
 function resetZoomChart(chart){
     chart.resetZoom();
+}
+
+function zoomChart(chart,value){
+    chart.zoom(value);
 }
 
 function updateChart(idChart,data,funcion){
@@ -296,12 +310,25 @@ function updateChart(idChart,data,funcion){
 function renderGeneral(datos){
     fetch("https://unpkg.com/world-atlas@2.0.2/countries-50m.json").then((result)=>result.json()).then((datapoint)=>{
         const countries=ChartGeo.topojson.feature(datapoint,datapoint.objects.countries).features;
-        console.log(countries);
+        //console.log(countries);
+        const dataChart=countries.map(country=>({feature:country,value:Math.random()}));
+        const backgroundColors=[];
+        for (let i = 0; i < dataChart.length; i++) {
+            if(dataChart[i]<0.4){
+                backgroundColors.push("#949494");
+            }else if(dataChart[i]>0.4 && dataChart[i]<0.8){
+                backgroundColors.push("#585858");
+            }
+            else{
+                backgroundColors.push("#363636");
+            }
+        }
         const data={
             labels:countries.map(country=>country.properties.name),
             datasets:[{
                 label:"countries",
-                data:countries.map(country=>({feature:country,value:Math.random()}))
+                data:dataChart,
+                background:backgroundColors
             }]
         }
         const options={

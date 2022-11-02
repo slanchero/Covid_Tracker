@@ -30,6 +30,19 @@ router.get("/muerte/:id",async(req,res)=>{
     const data=await Data.find({iso_code:req.params.id},{location:true,total_deaths:true,new_deaths:true,new_deaths_smoothed:true,population:true,date:true}).sort({date:1});
     res.json(data);
 });
+router.get("/general/",async (req,res)=>{
+    const data=await Data.aggregate([
+        {
+            $group:{
+                "_id":"$location",
+                "totalD":{$addToSet:"$total_deaths"},
+                "totalC":{$addToSet:"$total_cases"},
+                "totalV":{$addToSet:"$total_vaccinations"},
+            }
+        }
+    ]);
+    res.json(data);
+});
 
 
 module.exports=router;
