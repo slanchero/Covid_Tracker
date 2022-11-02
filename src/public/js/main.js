@@ -4,6 +4,9 @@ var btnOn=[];
 const btn1=document.getElementById("btn-group-1");
 const btn2=document.getElementById("btn-group-2");
 const btn3=document.getElementById("btn-group-3");
+var chart1;
+var chart2;
+var chart3;
 
 drawButtons(btn1);
 drawButtons(btn2);
@@ -86,129 +89,200 @@ async function draw(){
 }
 
 function renderDeaths(datos){
-    const dates=(datos)=>{
-        var date=[];
-        datos.forEach(e => {
-            date.push(e.date);
-        });
-        return date;
-    }
-
-    const muertes=(datos)=>{
-        var d=[];
-        datos.forEach(e => {
-            d.push(e.new_deaths);
-        });
-        return d;
-    }
-
     const data={
-        labels:dates(datos),
+        labels:datos.map(item=>new Intl.DateTimeFormat("es-MX",{year:"numeric",month:"long",day:"numeric"}).format(new Date(item.date))),
         datasets:[{
-            data:muertes(datos),
+            label:"Muertes",
+            data:datos.map(item=>item.total_deaths),
             pointBorderWidth:2
         }]
     };
 
     const options={
+        scales:{
+            x:{
+                grid:{
+                    display:false
+                }
+            },
+            y:{
+                grid:{
+                    display:false
+                }
+            }
+        },
         plugins:{
-            legend: { display: false },
+            legend: { 
+                position:"bottom",
+                labels:{
+                    fontColor:"black",
+                    fontFamily:"system-ui",
+                    boxWidth: 15,
+                },
+            },
+            elements:{
+                point:{
+                    redius:6,
+                }
+            },           
+            tooltip:{
+                callbacks:{
+                    title:(context)=>{return context[0].label},
+                    afterTitle:()=>{return "====================="},
+                    afterBody:(context)=>{
+                        return "N. muertes del dia: "+datos[context[0].dataIndex].new_deaths;
+                    }
+                },
+            },
             zoom:{
                 zoom:{
+                    mode:"x",
+                    overScaleMode:"y",
                     wheel:{
-                        enabled:true
+                        enabled:true,
+                        modifierKey:'ctrl',
                     }
                 }
             }
         }
     };
 
-    new Chart("graph_1",{type:"line",data},options);
+    chart1=new Chart("graph_1",{type:"line",data,options});
+    document.getElementById("reset1").addEventListener("click",()=>{resetZoomChart(chart1)});
 
 }
 
 function renderCases(datos){
-    const dates=(datos)=>{
-        var date=[];
-        datos.forEach(e => {
-            date.push(e.date);
-        });
-        return date;
-    }
-
-    const casos=(datos)=>{
-        var d=[];
-        datos.forEach(e => {
-            d.push(e.new_cases);
-        });
-        return d;
-    }
-
     const data={
-        labels:dates(datos),
+        labels:datos.map(item=>new Intl.DateTimeFormat("es-MX",{year:"numeric",month:"long",day:"numeric"}).format(new Date(item.date))),
         datasets:[{
-            data:casos(datos),
+            label:"Casos Covid",
+            data:datos.map(item=>item.total_cases),
             pointBorderWidth:2
         }]
     };
 
     const options={
+        scales:{
+            x:{
+                grid:{
+                    display:false
+                }
+            },
+            y:{
+                grid:{
+                    display:false
+                }
+            }
+        },
         plugins:{
-            legend:{display:false},
+            legend: { 
+                position:"bottom",
+                labels:{
+                    fontColor:"black",
+                    fontFamily:"system-ui",
+                    boxWidth: 15,
+                },
+            },
+            elements:{
+                point:{
+                    redius:6,
+                }
+            },           
+            tooltip:{
+                callbacks:{
+                    title:(context)=>{return context[0].label},
+                    afterTitle:()=>{return "====================="},
+                    afterBody:(context)=>{
+                        return "Casos diarios: "+datos[context[0].dataIndex].new_cases;
+                    }
+                },
+            },
             zoom:{
                 zoom:{
+                    mode:"x",
+                    overScaleMode:"y",
                     wheel:{
-                        enabled:true
+                        enabled:true,
+                        modifierKey:'ctrl',
                     }
                 }
             }
         }
     };
 
-    new Chart("graph_2",{type:"line",data},options);
+    chart2=new Chart("graph_2",{type:"line",data,options});
+    document.getElementById("reset2").addEventListener("click",()=>{resetZoomChart(chart2)});
 
 }
 
 function renderVaccination(datos){
-    const dates=(datos)=>{
-        var date=[];
-        datos.forEach(e => {
-            date.push(e.date);
-        });
-        return date;
-    }
-
-    const vacunaciones=(datos)=>{
-        var d=[];
-        datos.forEach(e => {
-            d.push(e.new_vaccinations);
-        });
-        return d;
-    }
-
     const data={
-        labels:dates(datos),
+        labels:datos.map(item=>new Intl.DateTimeFormat("es-MX",{year:"numeric",month:"long",day:"numeric"}).format(new Date(item.date))),
         datasets:[{
-            data:vacunaciones(datos),
+            label:"Vacunciones",
+            data:datos.map(item=>item.total_vaccinations),
             pointBorderWidth:2
         }]
     };
 
     const options={
+        scales:{
+            x:{
+                grid:{
+                    display:false
+                }
+            },
+            y:{
+                grid:{
+                    display:false
+                }
+            }
+        },
         plugins:{
-            legend:{display:false},
+            legend: { 
+                position:"bottom",
+                labels:{
+                    fontColor:"black",
+                    fontFamily:"system-ui",
+                    boxWidth: 15,
+                },
+            },
+            elements:{
+                point:{
+                    redius:6,
+                }
+            },           
+            tooltip:{
+                callbacks:{
+                    title:(context)=>{return context[0].label},
+                    afterTitle:()=>{return "====================="},
+                    afterBody:(context)=>{
+                        return "vacunados este dia: "+datos[context[0].dataIndex].new_vaccinations;
+                    }
+                },
+            },
             zoom:{
                 zoom:{
+                    mode:"x",
+                    overScaleMode:"y",
                     wheel:{
-                        enabled:true
+                        enabled:true,
+                        modifierKey:'ctrl',
                     }
                 }
             }
         }
     };
 
-    new Chart("graph_3",{type:"line",data},options);
+    chart3=new Chart("graph_3",{type:"line",data,options});
+    document.getElementById("reset3").addEventListener("click",()=>{resetZoomChart(chart3)});
 
+}
+
+
+function resetZoomChart(chart){
+    chart.resetZoom();
 }
 
 function updateChart(idChart,data,funcion){
@@ -216,7 +290,4 @@ function updateChart(idChart,data,funcion){
     chart.clear();
 	chart.destroy();
     funcion(data);
-    // chart.data.datasets[0].data=dato;
-    // chart.data.datasets[0].label=labels;
-    // chart.update();
 }

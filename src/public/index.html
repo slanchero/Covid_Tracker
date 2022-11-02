@@ -32,13 +32,13 @@
                       <a class="nav-link active" aria-current="page" href="#introduction">Introduction</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#muertes">Deaths</a>
+                      <a class="nav-link" href="#muertes">Muertes</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#casos">Cases</a>
+                      <a class="nav-link" href="#casos">Casos</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#vacunacion">Vaccination</a>
+                      <a class="nav-link" href="#vacunacion">Vacunacion</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#general">General</a>
@@ -52,24 +52,22 @@
       <header id="introduction" class="seccion">
         <div class="container mt-5 pt-3">
             <h2 class="display-1">COVID TRACKER</h2>
-            <!-- <p class="fs-5">El Covid-19 o coronavirus es una enfermedad infecciosa provocada por el virus SARS-CoV-2. El primer caso registrado según la OMS fue el 31 de diciembre del 2019 la cual fue confundida inicialmente con una neumonía vírica que se había declarado en Wuhan (república popular china) el virus se trasmitía por medio de pequeñas gotas emitidas por el portador al hablar, toser, estornudar o espirar, también era capaz de permanecer en estado de incubación en personas y de esta manera no presentaban ningún síntoma, pero el individuo se convertía en portador, además de esto tenía la capacidad de permanecer en objetos no vivos tales como metales, plásticos, vidrios, etc. Algunos de los síntomas que provocaba el Covid-19 son fiebre, tos seca, cansancio, perdida del gusto y olfato, dolor de garganta, dolor en el pecho uy dificultad para respirar en los casos mas graves. </p> -->
         </div>
       </header>
       <div class="seccion" id="muertes">
         <div class="container p-10">
           <div class="h-20">
             <h2 class="display-5">Muertes</h2>
-              <!-- <p class="fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum placeat ullam, ipsa sit quae commodi animi maiores quaerat dolor repudiandae aliquam nobis ipsum, cumque ea distinctio ab cum quod laboriosam expedita neque excepturi nemo minus. Quasi aperiam provident quisquam sunt quod, assumenda rem. Recusandae odit eos sint nesciunt accusantium!</p> -->
           </div>
           <div class="container-fluid">
             <div class="row r-st" >
               <figure id="r1">
                 <canvas id="graph_1">
-
                 </canvas>
+                <button type="button" class="btn btn-outline-dark" id="reset1">Reset Zoom</button>
               </figure>
             </div>
-            <div class="row m-5 overflow-auto">
+            <div class="row m-5 overflow-auto btn-scroll">
               <div class="btn-group" role="group" aria-label="Basic outlined example" id="btn-group-1">
 
               </div>
@@ -81,7 +79,6 @@
         <div class="container p-10">
           <div class="h-20">
             <h2 class="display-5">Casos</h2>
-              <!-- <p class="fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum placeat ullam, ipsa sit quae commodi animi maiores quaerat dolor repudiandae aliquam nobis ipsum, cumque ea distinctio ab cum quod laboriosam expedita neque excepturi nemo minus. Quasi aperiam provident quisquam sunt quod, assumenda rem. Recusandae odit eos sint nesciunt accusantium!</p> -->
           </div>
           <div class="container-fluid">
             <div class="row r-st" >
@@ -89,6 +86,7 @@
                 <canvas id="graph_2">
 
                 </canvas>
+                <button type="button" class="btn btn-outline-dark" id="reset2">Reset Zoom</button>
               </figure>
             </div>
             <div class="row overflow-auto m-5">
@@ -103,7 +101,6 @@
         <div class="container p-10">
           <div class="h-20">
             <h2 class="display-5">Vacunaciones</h2>
-              <!-- <p class="fs-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laborum placeat ullam, ipsa sit quae commodi animi maiores quaerat dolor repudiandae aliquam nobis ipsum, cumque ea distinctio ab cum quod laboriosam expedita neque excepturi nemo minus. Quasi aperiam provident quisquam sunt quod, assumenda rem. Recusandae odit eos sint nesciunt accusantium!</p> -->
           </div>
           <div class="container-fluid">
             <div class="row r-st" >
@@ -111,6 +108,7 @@
                 <canvas id="graph_3">
 
                 </canvas>
+                <button type="button" class="btn btn-outline-dark" id="reset3">Reset Zoom</button>
               </figure>
             </div>
             <div class="row m-5 overflow-auto">

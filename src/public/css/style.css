@@ -5,6 +5,14 @@ body{
     /* overflow-y: hidden; */
 }
 
+body::-webkit-scrollbar{
+    width: 10px;
+}
+body::-webkit-scrollbar-thumb{
+    background: rgb(92, 91, 91);
+    border-radius: 7px;
+}
+
 svg{
     width: 70vh;
     height: 40vh;
@@ -66,4 +74,14 @@ svg{
 	border-radius: 6px;  /* Bordes redondos */
 	box-shadow:inset 2px 2px 4px rgba(120, 120, 120, .4), inset -3px -3px 3px rgba(255,255,255,.4);
 	text-shadow: 1px 1px rgba(0,0,0,.3);  /* Sombra del texto */
+}
+
+.row::-webkit-scrollbar{
+    height: 10px;
+    background-color: #0D0D0D;
+    border-radius: 7px;
+}
+.row::-webkit-scrollbar-thumb{
+    background: rgb(92, 91, 91);
+    border-radius: 7px;
 }
